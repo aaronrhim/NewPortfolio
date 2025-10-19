@@ -12,19 +12,23 @@ export const MarsParallaxBackground = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate positions based on scroll with different parallax speeds
-  const starsOffset = scrollY * 0.2;
-  const planetOffset = scrollY * 0.3;
+  // Calculate positions based on scroll - creating planet rotation effect
+  const scrollProgress = Math.min(scrollY / 2000, 1); // Normalize to 0-1 over 2000px
+  const rotationAngle = scrollProgress * 360; // Full rotation over scroll range
+  
+  // Parallax offsets
+  const starsOffset = scrollY * 0.15;
   const distantMountainsOffset = scrollY * 0.35;
   const terrainOffset = scrollY * 0.5;
   const rocksOffset = scrollY * 0.55;
-  const roverOffset = scrollY * 0.6;
   
-  // Rover follows a curved path across the screen
-  const scrollProgress = Math.min(scrollY / 2000, 1); // Normalize to 0-1 over 2000px
+  // Earth moves horizontally and rotates
+  const earthX = 8 + (scrollProgress * 70); // Move from 8% to 78% across screen
+  const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
+  
+  // Rover follows terrain and rotates with planet
   const roverX = 5 + (scrollProgress * 80); // Move from 5% to 85%
-  const roverY = 25 - Math.sin(scrollProgress * Math.PI * 2) * 5; // Wave motion
-  const roverRotation = Math.sin(scrollProgress * Math.PI * 4) * 3; // Slight tilt
+  const roverRotation = rotationAngle * 0.2; // Rotate with planet rotation
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -60,13 +64,13 @@ export const MarsParallaxBackground = () => {
         })}
       </div>
 
-      {/* Earth planet - medium parallax */}
+      {/* Earth planet - horizontal movement with rotation */}
       <div
-        className="absolute"
+        className="absolute transition-all duration-100 ease-out"
         style={{
-          left: '8%',
+          left: `${earthX}%`,
           top: '15vh',
-          transform: `translateY(${planetOffset}px)`,
+          transform: `rotate(${earthRotation}deg)`,
           width: '200px',
           height: '200px',
         }}
@@ -202,14 +206,15 @@ export const MarsParallaxBackground = () => {
         <div className="absolute bottom-[22vh] left-[90%] w-4 h-6 bg-[#8B4513] rounded-sm opacity-50" />
       </div>
 
-      {/* Mars Rover - fastest parallax with curved path */}
+      {/* Mars Rover - on terrain with rotation */}
       <div
         className="absolute transition-all duration-100 ease-out"
         style={{
           left: `${roverX}%`,
-          bottom: `${roverY}vh`,
-          transform: `translateY(${-roverOffset}px) rotate(${roverRotation}deg)`,
+          bottom: '18vh', // Sits on terrain
+          transform: `rotate(${roverRotation}deg)`,
           width: '280px',
+          transformOrigin: 'center bottom',
         }}
       >
         <svg viewBox="0 0 280 180" className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
