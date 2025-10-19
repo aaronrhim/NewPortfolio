@@ -20,14 +20,16 @@ export const MarsParallaxBackground = () => {
   const starsOffset = scrollY * 0.15;
   const distantMountainsOffset = scrollY * 0.35;
   const terrainOffset = scrollY * 0.5;
-  const rocksOffset = scrollY * 0.55;
+  const colonyOffset = scrollY * 0.45;
   
-  // Earth moves horizontally and rotates
-  const earthX = 8 + (scrollProgress * 70); // Move from 8% to 78% across screen
+  // Earth arcs across entire screen (off-screen left to off-screen right)
+  const earthX = -15 + (scrollProgress * 130); // Move from -15% to 115% (off-screen both sides)
+  const earthY = 15 + Math.sin(scrollProgress * Math.PI) * 20; // Arc motion (starts low, peaks at middle, ends low)
   const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
   
-  // Rover follows terrain and rotates with planet
-  const roverX = 5 + (scrollProgress * 80); // Move from 5% to 85%
+  // Rover follows terrain in arc across screen
+  const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110% (off-screen both sides)
+  const roverY = 18 + Math.sin(scrollProgress * Math.PI) * 8; // Follows terrain arc
   const roverRotation = rotationAngle * 0.2; // Rotate with planet rotation
 
   return (
@@ -64,12 +66,12 @@ export const MarsParallaxBackground = () => {
         })}
       </div>
 
-      {/* Earth planet - horizontal movement with rotation */}
+      {/* Earth planet - arcing movement with rotation */}
       <div
         className="absolute transition-all duration-100 ease-out"
         style={{
           left: `${earthX}%`,
-          top: '15vh',
+          top: `${earthY}vh`,
           transform: `rotate(${earthRotation}deg)`,
           width: '200px',
           height: '200px',
@@ -178,40 +180,69 @@ export const MarsParallaxBackground = () => {
         </div>
       </div>
 
-      {/* Rocks and craters layer - parallax between terrain and rover */}
+      {/* Mars Colony - gets hidden by terrain when scrolling up */}
       <div
         className="absolute bottom-0 left-0 right-0"
         style={{
-          transform: `translateY(${-rocksOffset}px)`,
+          transform: `translateY(${-colonyOffset}px)`,
         }}
       >
-        {/* Craters */}
-        <div className="absolute bottom-[22vh] left-[10%] w-16 h-8 rounded-[50%] bg-[#8B4513] opacity-50 border-2 border-[#654321]" />
-        <div className="absolute bottom-[28vh] left-[35%] w-24 h-12 rounded-[50%] bg-[#8B4513] opacity-40 border-2 border-[#654321]" />
-        <div className="absolute bottom-[25vh] left-[65%] w-20 h-10 rounded-[50%] bg-[#8B4513] opacity-45 border-2 border-[#654321]" />
+        {/* Dome habitats */}
+        <div className="absolute bottom-[24vh] left-[15%]">
+          <div className="w-24 h-12 bg-gradient-to-b from-[#C0C0C0]/40 to-[#808080]/30 rounded-t-full border-2 border-[#606060]/50" />
+          <div className="w-24 h-2 bg-[#505050]" />
+        </div>
         
-        {/* Rocks */}
-        <div className="absolute bottom-[20vh] left-[25%] w-8 h-12 bg-[#654321] opacity-70" 
-          style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }} />
-        <div className="absolute bottom-[23vh] left-[50%] w-10 h-14 bg-[#654321] opacity-60"
-          style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)' }} />
-        <div className="absolute bottom-[21vh] left-[80%] w-12 h-16 bg-[#654321] opacity-65"
-          style={{ clipPath: 'polygon(50% 0%, 80% 30%, 100% 100%, 0% 100%, 20% 30%)' }} />
+        <div className="absolute bottom-[26vh] left-[35%]">
+          <div className="w-32 h-16 bg-gradient-to-b from-[#C0C0C0]/40 to-[#808080]/30 rounded-t-full border-2 border-[#606060]/50" />
+          <div className="w-32 h-2 bg-[#505050]" />
+        </div>
         
-        {/* Small scattered rocks */}
-        <div className="absolute bottom-[19vh] left-[18%] w-4 h-6 bg-[#8B4513] rounded-sm opacity-50" />
-        <div className="absolute bottom-[24vh] left-[42%] w-5 h-7 bg-[#8B4513] rounded-sm opacity-55" />
-        <div className="absolute bottom-[20vh] left-[58%] w-3 h-5 bg-[#8B4513] rounded-sm opacity-45" />
-        <div className="absolute bottom-[26vh] left-[72%] w-6 h-8 bg-[#8B4513] rounded-sm opacity-60" />
-        <div className="absolute bottom-[22vh] left-[90%] w-4 h-6 bg-[#8B4513] rounded-sm opacity-50" />
+        <div className="absolute bottom-[23vh] left-[58%]">
+          <div className="w-20 h-10 bg-gradient-to-b from-[#C0C0C0]/40 to-[#808080]/30 rounded-t-full border-2 border-[#606060]/50" />
+          <div className="w-20 h-2 bg-[#505050]" />
+        </div>
+        
+        {/* Rectangular buildings */}
+        <div className="absolute bottom-[22vh] left-[25%] w-16 h-20 bg-gradient-to-b from-[#A0A0A0] to-[#707070] border-2 border-[#505050]">
+          <div className="absolute top-2 left-2 w-3 h-3 bg-[#4a9eff]/60" />
+          <div className="absolute top-2 right-2 w-3 h-3 bg-[#4a9eff]/60" />
+          <div className="absolute top-8 left-2 w-3 h-3 bg-[#4a9eff]/60" />
+          <div className="absolute top-8 right-2 w-3 h-3 bg-[#4a9eff]/60" />
+        </div>
+        
+        <div className="absolute bottom-[24vh] left-[48%] w-12 h-24 bg-gradient-to-b from-[#A0A0A0] to-[#707070] border-2 border-[#505050]">
+          <div className="absolute top-2 left-2 w-2 h-2 bg-[#4a9eff]/60" />
+          <div className="absolute top-2 right-2 w-2 h-2 bg-[#4a9eff]/60" />
+          <div className="absolute top-7 left-2 w-2 h-2 bg-[#4a9eff]/60" />
+          <div className="absolute top-7 right-2 w-2 h-2 bg-[#4a9eff]/60" />
+        </div>
+        
+        <div className="absolute bottom-[21vh] left-[70%] w-14 h-16 bg-gradient-to-b from-[#A0A0A0] to-[#707070] border-2 border-[#505050]">
+          <div className="absolute top-2 left-2 w-2 h-2 bg-[#4a9eff]/60" />
+          <div className="absolute top-2 right-2 w-2 h-2 bg-[#4a9eff]/60" />
+        </div>
+        
+        {/* Communication tower */}
+        <div className="absolute bottom-[22vh] left-[80%]">
+          <div className="w-2 h-32 bg-gradient-to-t from-[#606060] to-[#808080] mx-auto" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#C0C0C0] rounded-full border-2 border-[#707070]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[#ff4444] rounded-full animate-pulse" />
+          </div>
+        </div>
+        
+        {/* Solar panel arrays */}
+        <div className="absolute bottom-[20vh] left-[20%] w-12 h-8 bg-gradient-to-br from-[#1a1a2e] to-[#2a2a3e] border border-[#4a4a5e] opacity-80 transform -rotate-12" />
+        <div className="absolute bottom-[21vh] left-[52%] w-16 h-10 bg-gradient-to-br from-[#1a1a2e] to-[#2a2a3e] border border-[#4a4a5e] opacity-80 transform rotate-6" />
+        <div className="absolute bottom-[19vh] left-[75%] w-10 h-6 bg-gradient-to-br from-[#1a1a2e] to-[#2a2a3e] border border-[#4a4a5e] opacity-80 transform -rotate-6" />
       </div>
 
-      {/* Mars Rover - on terrain with rotation */}
+      {/* Mars Rover - arcing across terrain with rotation */}
       <div
         className="absolute transition-all duration-100 ease-out"
         style={{
           left: `${roverX}%`,
-          bottom: '18vh', // Sits on terrain
+          bottom: `${roverY}vh`,
           transform: `rotate(${roverRotation}deg)`,
           width: '280px',
           transformOrigin: 'center bottom',
