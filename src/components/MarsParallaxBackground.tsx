@@ -13,7 +13,7 @@ export const MarsParallaxBackground = () => {
   }, []);
 
   // Calculate positions based on scroll - creating planet rotation effect
-  const scrollProgress = Math.min(scrollY / 2000, 1); // Normalize to 0-1 over 2000px
+  const scrollProgress = Math.min(scrollY / 1500, 1); // Normalize to 0-1 over 1500px (faster movement)
   const rotationAngle = scrollProgress * 360; // Full rotation over scroll range
   
   // Parallax offsets
@@ -23,13 +23,15 @@ export const MarsParallaxBackground = () => {
   const colonyOffset = scrollY * 0.45;
   
   // Earth arcs across entire screen (off-screen left to off-screen right)
-  const earthX = -15 + (scrollProgress * 130); // Move from -15% to 115% (off-screen both sides)
-  const earthY = 15 + Math.sin(scrollProgress * Math.PI) * 20; // Arc motion (starts low, peaks at middle, ends low)
+  // Starts hidden left (-20%), peaks at center with higher Y, ends hidden right (120%)
+  const earthX = -20 + (scrollProgress * 140); // Move from -20% to 120%
+  // Arc: starts at 35vh (low), peaks at 10vh (high) at center, ends at 35vh (low)
+  const earthY = 35 - Math.sin(scrollProgress * Math.PI) * 25; // Creates arc motion
   const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
   
-  // Rover follows terrain in arc across screen
+  // Rover moves straight across terrain (no arc)
   const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110% (off-screen both sides)
-  const roverY = 18 + Math.sin(scrollProgress * Math.PI) * 8; // Follows terrain arc
+  const roverY = 18; // Fixed height on terrain
   const roverRotation = rotationAngle * 0.2; // Rotate with planet rotation
 
   return (
