@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import marsRoverImg from "@/assets/mars-rover.png";
-import earthPlanetImg from "@/assets/earth-planet.png";
 
 export const MarsParallaxBackground = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -69,15 +67,36 @@ export const MarsParallaxBackground = () => {
           left: '8%',
           top: '15vh',
           transform: `translateY(${planetOffset}px)`,
-          width: '120px',
-          height: '120px',
+          width: '200px',
+          height: '200px',
         }}
       >
-        <img
-          src={earthPlanetImg}
-          alt=""
-          className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(100,149,237,0.5)]"
-        />
+        <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_0_40px_rgba(100,149,237,0.6)]">
+          <defs>
+            <radialGradient id="earthGradient" cx="35%" cy="35%">
+              <stop offset="0%" stopColor="#6495ED" />
+              <stop offset="50%" stopColor="#4169E1" />
+              <stop offset="100%" stopColor="#1E3A5F" />
+            </radialGradient>
+            <radialGradient id="earthHighlight" cx="30%" cy="30%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+            </radialGradient>
+          </defs>
+          {/* Main sphere */}
+          <circle cx="100" cy="100" r="90" fill="url(#earthGradient)" />
+          {/* Continents */}
+          <path d="M60,50 Q80,45 100,50 T140,55 Q145,65 140,75 L120,80 Q110,85 95,80 L70,70 Z" fill="#228B22" opacity="0.7" />
+          <path d="M130,90 Q150,85 160,95 L165,120 Q160,135 145,130 L125,125 Q120,115 125,105 Z" fill="#228B22" opacity="0.6" />
+          <path d="M40,110 Q50,105 65,110 L70,130 Q65,145 50,140 L35,130 Z" fill="#228B22" opacity="0.65" />
+          <ellipse cx="85" cy="140" rx="25" ry="15" fill="#228B22" opacity="0.55" />
+          {/* Clouds */}
+          <ellipse cx="70" cy="60" rx="15" ry="8" fill="white" opacity="0.4" />
+          <ellipse cx="150" cy="110" rx="20" ry="10" fill="white" opacity="0.35" />
+          <ellipse cx="55" cy="150" rx="12" ry="6" fill="white" opacity="0.3" />
+          {/* Highlight */}
+          <circle cx="100" cy="100" r="90" fill="url(#earthHighlight)" />
+        </svg>
       </div>
 
       {/* Distant mountains layer */}
@@ -190,18 +209,92 @@ export const MarsParallaxBackground = () => {
           left: `${roverX}%`,
           bottom: `${roverY}vh`,
           transform: `translateY(${-roverOffset}px) rotate(${roverRotation}deg)`,
-          width: '180px',
+          width: '280px',
         }}
       >
-        <img
-          src={marsRoverImg}
-          alt=""
-          className="w-full h-auto object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
-        />
+        <svg viewBox="0 0 280 180" className="w-full h-auto drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
+          <defs>
+            <linearGradient id="roverBody" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#B8B8B8" />
+              <stop offset="100%" stopColor="#707070" />
+            </linearGradient>
+            <linearGradient id="roverPanel" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#1a1a2e" />
+              <stop offset="50%" stopColor="#2a2a3e" />
+              <stop offset="100%" stopColor="#1a1a2e" />
+            </linearGradient>
+          </defs>
+          
+          {/* Wheels */}
+          <g>
+            {/* Left wheels */}
+            <circle cx="60" cy="155" r="22" fill="#3a3a3a" stroke="#1a1a1a" strokeWidth="3" />
+            <circle cx="60" cy="155" r="14" fill="#2a2a2a" />
+            <circle cx="140" cy="155" r="22" fill="#3a3a3a" stroke="#1a1a1a" strokeWidth="3" />
+            <circle cx="140" cy="155" r="14" fill="#2a2a2a" />
+            <circle cx="220" cy="155" r="22" fill="#3a3a3a" stroke="#1a1a1a" strokeWidth="3" />
+            <circle cx="220" cy="155" r="14" fill="#2a2a2a" />
+            
+            {/* Wheel spokes */}
+            <line x1="60" y1="145" x2="60" y2="165" stroke="#555" strokeWidth="2" />
+            <line x1="50" y1="155" x2="70" y2="155" stroke="#555" strokeWidth="2" />
+            <line x1="140" y1="145" x2="140" y2="165" stroke="#555" strokeWidth="2" />
+            <line x1="130" y1="155" x2="150" y2="155" stroke="#555" strokeWidth="2" />
+            <line x1="220" y1="145" x2="220" y2="165" stroke="#555" strokeWidth="2" />
+            <line x1="210" y1="155" x2="230" y2="155" stroke="#555" strokeWidth="2" />
+          </g>
+          
+          {/* Suspension */}
+          <rect x="50" y="140" width="180" height="8" fill="#505050" rx="2" />
+          <rect x="45" y="135" width="10" height="15" fill="#606060" rx="2" />
+          <rect x="135" y="135" width="10" height="15" fill="#606060" rx="2" />
+          <rect x="225" y="135" width="10" height="15" fill="#606060" rx="2" />
+          
+          {/* Main body */}
+          <rect x="40" y="80" width="200" height="60" fill="url(#roverBody)" rx="8" />
+          <rect x="45" y="85" width="190" height="50" fill="#909090" opacity="0.3" rx="6" />
+          
+          {/* Solar panels */}
+          <rect x="25" y="55" width="230" height="20" fill="url(#roverPanel)" rx="3" />
+          <g opacity="0.6">
+            <line x1="35" y1="57" x2="35" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="55" y1="57" x2="55" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="75" y1="57" x2="75" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="95" y1="57" x2="95" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="115" y1="57" x2="115" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="135" y1="57" x2="135" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="155" y1="57" x2="155" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="175" y1="57" x2="175" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="195" y1="57" x2="195" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="215" y1="57" x2="215" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+            <line x1="235" y1="57" x2="235" y2="73" stroke="#4a4a5e" strokeWidth="1.5" />
+          </g>
+          
+          {/* Camera mast */}
+          <rect x="130" y="35" width="20" height="45" fill="#808080" rx="3" />
+          <rect x="125" y="30" width="30" height="12" fill="#606060" rx="4" />
+          
+          {/* Cameras */}
+          <circle cx="133" cy="36" r="4" fill="#2a2a3e" />
+          <circle cx="147" cy="36" r="4" fill="#2a2a3e" />
+          <circle cx="133" cy="36" r="2" fill="#4a9eff" opacity="0.8" />
+          <circle cx="147" cy="36" r="2" fill="#4a9eff" opacity="0.8" />
+          
+          {/* Antenna */}
+          <line x1="140" y1="30" x2="140" y2="15" stroke="#707070" strokeWidth="2" />
+          <circle cx="140" cy="12" r="5" fill="#C0C0C0" />
+          
+          {/* Details on body */}
+          <rect x="60" y="95" width="35" height="25" fill="#505050" rx="3" />
+          <rect x="185" y="95" width="35" height="25" fill="#505050" rx="3" />
+          <circle cx="140" cy="107" r="12" fill="#404040" />
+          <circle cx="140" cy="107" r="8" fill="#2a2a3e" />
+        </svg>
+        
         {/* Dust trail effect */}
         {scrollY > 50 && (
           <div 
-            className="absolute -bottom-2 left-0 w-12 h-3 bg-[#CD853F] rounded-full blur-sm opacity-30"
+            className="absolute -bottom-2 left-0 w-16 h-4 bg-[#CD853F] rounded-full blur-md opacity-30"
             style={{
               transform: `translateX(-${scrollProgress * 20}px)`,
             }}
