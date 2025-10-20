@@ -22,16 +22,17 @@ export const MarsParallaxBackground = () => {
   const terrainOffset = scrollY * 0.5;
   const colonyOffset = scrollY * 0.45;
   
-  // Earth arcs across screen while moving UP (stays above terrain)
+  // Earth arcs across entire screen (off-screen left to off-screen right)
+  // Starts hidden left (-20%), peaks at center with higher Y, ends hidden right (120%)
   const earthX = -20 + (scrollProgress * 140); // Move from -20% to 120%
-  // Arc: starts at 45vh (low), peaks at 8vh (high) at center, ends at 20vh (higher than start)
-  const earthY = 45 - (scrollProgress * 25) - Math.sin(scrollProgress * Math.PI) * 17;
+  // Arc: starts at 35vh (low), peaks at 10vh (high) at center, ends at 35vh (low)
+  const earthY = 35 - Math.sin(scrollProgress * Math.PI) * 25; // Creates arc motion
   const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
   
-  // Rover moves across terrain and grows (approaches camera) - NO rotation
-  const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110%
+  // Rover moves straight across terrain (no arc)
+  const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110% (off-screen both sides)
   const roverY = 18; // Fixed height on terrain
-  const roverScale = 0.4 + (scrollProgress * 1.2); // Grows from 0.4 to 1.6x
+  const roverRotation = rotationAngle * 0.2; // Rotate with planet rotation
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -238,13 +239,13 @@ export const MarsParallaxBackground = () => {
         <div className="absolute bottom-[19vh] left-[75%] w-10 h-6 bg-gradient-to-br from-[#1a1a2e] to-[#2a2a3e] border border-[#4a4a5e] opacity-80 transform -rotate-6" />
       </div>
 
-      {/* Mars Rover - moves across terrain and approaches camera (grows) */}
+      {/* Mars Rover - arcing across terrain with rotation */}
       <div
         className="absolute transition-all duration-100 ease-out"
         style={{
           left: `${roverX}%`,
           bottom: `${roverY}vh`,
-          transform: `scale(${roverScale})`,
+          transform: `rotate(${roverRotation}deg)`,
           width: '280px',
           transformOrigin: 'center bottom',
         }}
