@@ -16,14 +16,11 @@ export const MarsParallaxBackground = () => {
   const scrollProgress = Math.min(scrollY / 1500, 1); // Normalize to 0-1 over 1500px (faster movement)
   const rotationAngle = scrollProgress * 360; // Full rotation over scroll range
   
-  // Parallax offsets for terrain layers
+  // Parallax offsets
   const starsOffset = scrollY * 0.15;
   const distantMountainsOffset = scrollY * 0.35;
   const terrainOffset = scrollY * 0.5;
   const colonyOffset = scrollY * 0.45;
-  const terrainFold1Offset = scrollY * 0.6;
-  const terrainFold2Offset = scrollY * 0.7;
-  const terrainFold3Offset = scrollY * 0.8;
   
   // Earth arcs across screen while moving UP (stays above terrain)
   const earthX = -20 + (scrollProgress * 140); // Move from -20% to 120%
@@ -31,16 +28,10 @@ export const MarsParallaxBackground = () => {
   const earthY = 45 - (scrollProgress * 25) - Math.sin(scrollProgress * Math.PI) * 17;
   const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
   
-  // Rover behavior: grows and moves right until threshold, then moves down the terrain
-  const roverThreshold = 0.35; // At 35% scroll, rover stops moving right and starts moving down
-  const isRoverTraversing = scrollProgress > roverThreshold;
-  
-  const roverX = isRoverTraversing ? 55 : -10 + (scrollProgress / roverThreshold * 65); // Move from -10% to 55%, then stop
-  const roverScale = isRoverTraversing ? 1.2 : 0.4 + (scrollProgress / roverThreshold * 0.8); // Grow to 1.2x, then stop
-  
-  // When traversing, move down the page following terrain
-  const traverseProgress = isRoverTraversing ? (scrollProgress - roverThreshold) / (1 - roverThreshold) : 0;
-  const roverY = isRoverTraversing ? 18 - (traverseProgress * 150) : 18; // Moves DOWN 150vh (subtract from bottom)
+  // Rover moves across terrain and grows (approaches camera) - NO rotation
+  const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110%
+  const roverY = 18; // Fixed height on terrain
+  const roverScale = 0.4 + (scrollProgress * 1.2); // Grows from 0.4 to 1.6x
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -346,94 +337,6 @@ export const MarsParallaxBackground = () => {
             }}
           />
         )}
-      </div>
-
-      {/* Extended terrain folds - seamless parallax layers going down the page */}
-      {/* Terrain fold 1 */}
-      <div
-        className="absolute left-0 right-0"
-        style={{
-          top: '65vh',
-          transform: `translateY(${-terrainFold1Offset}px)`,
-          height: '50vh',
-        }}
-      >
-        <svg
-          className="absolute top-0 w-full h-full"
-          viewBox="0 0 1200 400"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="marsGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#ff6347', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#d2691e', stopOpacity: 1 }} />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,0 L1200,0 L1200,250 Q900,230 600,245 T0,235 Z"
-            fill="url(#marsGradient2)"
-            opacity="0.8"
-          />
-          <path
-            d="M0,235 Q300,220 600,230 T1200,225 L1200,400 L0,400 Z"
-            fill="#cd853f"
-          />
-        </svg>
-      </div>
-
-      {/* Terrain fold 2 */}
-      <div
-        className="absolute left-0 right-0"
-        style={{
-          top: '105vh',
-          transform: `translateY(${-terrainFold2Offset}px)`,
-          height: '55vh',
-        }}
-      >
-        <svg
-          className="absolute top-0 w-full h-full"
-          viewBox="0 0 1200 400"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,0 L1200,0 L1200,280 Q800,260 400,275 T0,265 Z"
-            fill="#a0522d"
-            opacity="0.7"
-          />
-          <path
-            d="M0,265 Q400,245 800,260 T1200,255 L1200,400 L0,400 Z"
-            fill="#d2691e"
-          />
-        </svg>
-      </div>
-
-      {/* Terrain fold 3 */}
-      <div
-        className="absolute left-0 right-0"
-        style={{
-          top: '150vh',
-          transform: `translateY(${-terrainFold3Offset}px)`,
-          height: '60vh',
-        }}
-      >
-        <svg
-          className="absolute top-0 w-full h-full"
-          viewBox="0 0 1200 400"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,0 L1200,0 L1200,300 Q900,275 600,290 T0,280 Z"
-            fill="#8b4513"
-            opacity="0.6"
-          />
-          <path
-            d="M0,280 Q350,260 700,275 T1200,270 L1200,400 L0,400 Z"
-            fill="#cd853f"
-          />
-        </svg>
       </div>
     </div>
   );

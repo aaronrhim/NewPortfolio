@@ -34,7 +34,7 @@ export const Skills = ({ onEarn }: SkillsProps) => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-secondary/20">
+    <section className="py-20 px-4 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-serif font-bold mb-4">Skills & Expertise</h2>
