@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const MarsParallaxBackground = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [roverProgress, setRoverProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,6 +12,45 @@ export const MarsParallaxBackground = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTimestamp: number | null = null;
+    const speedPerMs = 0.00005; // Controls how quickly the rover crosses the scene
+
+    const animate = (timestamp: number) => {
+      if (lastTimestamp === null) {
+        lastTimestamp = timestamp;
+      }
+
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
+      setRoverProgress((prev) => {
+        const next = prev + delta * speedPerMs;
+        return next >= 1 ? next - 1 : next;
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 80 }).map(() => {
+        const size = Math.random() * 3 + 1;
+        return {
+          size,
+          left: Math.random() * 100,
+          top: Math.random() * 200 - 20,
+          opacity: Math.random() * 0.5 + 0.3,
+        };
+      }),
+    []
+  );
 
   // Calculate positions based on scroll - creating planet rotation effect
   const scrollProgress = Math.min(scrollY / 1500, 1); // Normalize to 0-1 over 1500px (faster movement)
@@ -24,18 +64,19 @@ export const MarsParallaxBackground = () => {
   
   // Earth arcs across entire screen (off-screen left to off-screen right)
   // Starts hidden left (-20%), peaks at center with higher Y, ends hidden right (120%)
-  const earthX = -20 + (scrollProgress * 140); // Move from -20% to 120%
+  const earthX = -25 + (scrollProgress * 190); // Move from -20% to 120%
   // Arc: starts at 35vh (low), peaks at 10vh (high) at center, ends at 35vh (low)
-  const earthY = 35 - Math.sin(scrollProgress * Math.PI) * 25; // Creates arc motion
+  const earthY = 40 - Math.sin(scrollProgress * Math.PI) * 40; // Creates arc motion
   const earthRotation = rotationAngle * 0.3; // Slower rotation for Earth
   
   // Rover moves straight across terrain (no arc)
-  const roverX = -10 + (scrollProgress * 120); // Move from -10% to 110% (off-screen both sides)
+  const roverX = -20 + roverProgress * 140; // Move from off-screen left to off-screen right
   const roverY = 18; // Fixed height on terrain
-  const roverRotation = rotationAngle * 0.2; // Rotate with planet rotation
+  const roverTilt = Math.sin(roverProgress * Math.PI * 2) * 3; // Slight rocking motion
+  const roverBounce = Math.sin(roverProgress * Math.PI * 4) * 3;
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 -z-10 pointer-events-none">
       {/* Space background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] via-[#16213e] to-[#0f3460]" />
       
@@ -45,27 +86,20 @@ export const MarsParallaxBackground = () => {
         style={{ transform: `translateY(${starsOffset}px)` }}
       >
         {/* Generate multiple stars */}
-        {Array.from({ length: 80 }).map((_, i) => {
-          const size = Math.random() * 3 + 1;
-          const left = Math.random() * 100;
-          const top = (Math.random() * 200) - 20; // Extended range for scrolling
-          const opacity = Math.random() * 0.5 + 0.3;
-          
-          return (
-            <div
-              key={`star-${i}`}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                left: `${left}%`,
-                top: `${top}vh`,
-                opacity,
-                boxShadow: `0 0 ${size * 2}px rgba(255, 255, 255, ${opacity})`,
-              }}
-            />
-          );
-        })}
+        {stars.map((star, i) => (
+          <div
+            key={`star-${i}`}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              left: `${star.left}%`,
+              top: `${star.top}vh`,
+              opacity: star.opacity,
+              boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity})`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Earth planet - arcing movement with rotation */}
@@ -112,7 +146,7 @@ export const MarsParallaxBackground = () => {
         className="absolute bottom-0 left-0 right-0"
         style={{
           transform: `translateY(${-distantMountainsOffset}px)`,
-          height: '45vh',
+          height: 'calc(35vh + 300px)',
         }}
       >
         <svg
@@ -139,7 +173,7 @@ export const MarsParallaxBackground = () => {
         className="absolute bottom-0 left-0 right-0"
         style={{
           transform: `translateY(${-terrainOffset}px)`,
-          height: '35vh',
+          height: 'calc(35vh + 50px)', 
         }}
       >
         {/* Orange Mars terrain with hills */}
@@ -169,7 +203,7 @@ export const MarsParallaxBackground = () => {
               opacity="0.8"
             />
             <path
-              d="M0,220 Q150,200 300,210 T600,205 T900,215 T1200,210 L1200,300 L0,300 Z"
+              d="M0,220 Q150,200 300,210 T600,205 T900,215 T1200,210 L1200,1500 L0,1500 Z"
               fill="#d2691e"
             />
           </svg>
@@ -245,7 +279,7 @@ export const MarsParallaxBackground = () => {
         style={{
           left: `${roverX}%`,
           bottom: `${roverY}vh`,
-          transform: `rotate(${roverRotation}deg)`,
+          transform: `translateY(${roverBounce - terrainOffset}px) rotate(${roverTilt}deg)`,
           width: '280px',
           transformOrigin: 'center bottom',
         }}
@@ -330,11 +364,11 @@ export const MarsParallaxBackground = () => {
         </svg>
         
         {/* Dust trail effect */}
-        {scrollY > 50 && (
+        {roverProgress > 0.05 && (
           <div 
             className="absolute -bottom-2 left-0 w-16 h-4 bg-[#CD853F] rounded-full blur-md opacity-30"
             style={{
-              transform: `translateX(-${scrollProgress * 20}px)`,
+              transform: `translateX(-${roverProgress * 40}px)`,
             }}
           />
         )}

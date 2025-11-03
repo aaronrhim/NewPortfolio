@@ -10,9 +10,9 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ title, description, tags, image, link }: ProjectCardProps) => {
   const CardContent = () => (
-    <div className="group relative bg-card rounded-xl overflow-hidden border border-border card-hover cursor-pointer">
+    <div className="group relative bg-card rounded-xl  border border-border card-hover cursor-pointer">
       {image && (
-        <div className="aspect-video w-full overflow-hidden bg-muted">
+        <div className="aspect-video w-full  bg-muted">
           <img
             src={image}
             alt={title}
