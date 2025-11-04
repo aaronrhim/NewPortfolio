@@ -61,7 +61,7 @@ const projectsData: Record<string, ProjectData> = {
       "Built with modern web technologies, the portfolio demonstrates advanced React patterns, TypeScript type safety, Tailwind CSS design system, and full-stack capabilities with Supabase for persistent data storage and AWS Amplify for real-time synchronization."
     ],
     tech: ["Next.js", "React", "Tailwind", "TypeScript", "Supabase"],
-    github: "https://github.com/aaronrhim/genesis-gin"
+    github: "https://github.com/aaronrhim/NewPortfolio"
   },
   "rover": {
     id: "rover",
