@@ -72,15 +72,12 @@ export const Projects = ({ onEarn }: ProjectsProps) => {
           <h2 className={`text-5xl font-serif font-bold mb-4 transition-colors duration-300 ${
             isOnDarkBackground ? "text-white" : "text-foreground"
           }`}>
-            My Projects
+            Highlighted Projects
           </h2>
           <p className={`text-xl transition-colors duration-300 ${
             isOnDarkBackground ? "text-white/80" : "text-muted-foreground"
           }`}>
-            A collection of my{" "}
-            <ClickableWord value={3000} onEarn={onEarn} wordId="projects-recent-work" onTriggerHeader={() => {}}>
-              recent work
-            </ClickableWord>
+            <em>'A collection of my recent work'</em>
           </p>
         </div>
 

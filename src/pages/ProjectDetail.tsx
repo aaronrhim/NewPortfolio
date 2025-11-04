@@ -29,7 +29,7 @@ const projectsData: Record<string, ProjectData> = {
   "alzheimer-camera": {
     id: "alzheimer-camera",
     title: "Remember Me",
-    tagline: "Helping loved ones when memory falters",
+    tagline: "'helping loved ones when memory falters'",
     description: [
       "Remember Me gives ones family a calm and affordable way to help loved ones when their memory falters. By pairing a friendly camera with a mobile app, we turn everyday moments into reassuring reminders so families can stay connected, even when names are hard to recall.",
       "The camera easily attaches to clothing and whenever you pass by someone you've previously met, it announces the name of that person, their relationship with you, and a short note.",
@@ -42,7 +42,7 @@ const projectsData: Record<string, ProjectData> = {
   "get-swole": {
     id: "get-swole",
     title: "Get Swole",
-    tagline: "Real-time gym form analysis",
+    tagline: "'an absolute need when gymming'",
     description: [
       "Get Swole is a fullstack web application that boosts gym performance by analyzing your form in real-time. It leverages MediaPipe for pose landmark detection and a custom machine learning model to verify full exercise repetitions.",
       "The application uses advanced computer vision to extract pose landmarks from your camera feed, calculating joint angles and movement patterns to ensure proper form during exercises.",
@@ -54,7 +54,7 @@ const projectsData: Record<string, ProjectData> = {
   "website-portfolio": {
     id: "website-portfolio",
     title: "Website Portfolio",
-    tagline: "Interactive Mars-themed portfolio experience",
+    tagline: "'beautiful, aesthetic, and reflective'",
     description: [
       "This portfolio website features a unique gamified experience where visitors can click highlighted words throughout the site to earn virtual currency. Each interaction is tracked persistently using cloud storage, ensuring progress is maintained across sessions and devices.",
       "The site showcases an immersive Mars parallax background with animated elements including a roving Mars rover, rotating Earth, distant mountains, and a futuristic Mars colony. The rover autonomously travels across the terrain, reversing direction at screen edges while maintaining smooth animations.",
@@ -66,7 +66,7 @@ const projectsData: Record<string, ProjectData> = {
   "rover": {
     id: "rover",
     title: "Rover",
-    tagline: "Advancing rover autonomy through reinforcement learning",
+    tagline: "'so cool'",
     description: [
       "The UBC Rover team's reinforcement learning framework designed to push the boundaries of autonomous navigation and intelligent decision-making in challenging terrain. This project serves as the foundation for teaching our rover to learn from its environment and make complex decisions in real-time.",
       "The framework integrates with the rover's ROS-based control systems, enabling seamless deployment of trained models directly onto the physical hardware. Through iterative training in both simulated and real-world environments, the rover continuously improves its ability to navigate obstacles, optimize path planning, and adapt to unexpected conditions.",
@@ -86,7 +86,7 @@ const projectsData: Record<string, ProjectData> = {
   "lecruiter": {
     id: "lecruiter",
     title: "LeCruiter",
-    tagline: "AI-powered recruitment automation",
+    tagline: "'LeBron everything'",
     description: [
       "LeCruiter is an AI-powered recruiter that streamlines the hiring process using advanced language models and automation. This system analyzes resumes, conducts initial candidate screenings, and matches applicants with job requirements efficiently.",
       "Built during a GenAI hackathon, LeCruiter leverages natural language processing to understand job descriptions and candidate profiles, providing intelligent recommendations and insights to hiring managers.",
@@ -98,7 +98,7 @@ const projectsData: Record<string, ProjectData> = {
   "fact": {
     id: "fact",
     title: "F.A.C.T",
-    tagline: "Virtual fashion try-on using computer vision",
+    tagline: "'try on clothes with AI'",
     description: [
       "F.A.C.T (Fashion App Computer Try-on) is an innovative fashion application that uses computer vision, MediaPipe, and real-time pose detection to virtually map clothing onto your body using just a webcam.",
       "The application employs the same advanced computer vision principles as Get Swole, utilizing MediaPipe for precise body landmark detection and tracking. This enables accurate clothing overlay that moves naturally with your body movements.",
@@ -110,7 +110,7 @@ const projectsData: Record<string, ProjectData> = {
   "arrc": {
     id: "arrc",
     title: "ARRC",
-    tagline: "Autonomous drone competition system",
+    tagline: "'Aerial Robotics and Rocketry Club'",
     description: [
       "ARRC is the UBC Aerial Robotics and Rocketry Club's autonomous unmanned aerial system (UAS) project for the 2025 UAS Competition. This comprehensive system implements advanced flight control, computer vision, and mission planning capabilities.",
       "The project integrates multiple subsystems including autonomous navigation, object detection and tracking, precision landing, and payload delivery mechanisms. Using ROS for system coordination, the drone can execute complex mission profiles with minimal human intervention.",
@@ -136,7 +136,7 @@ const projectsData: Record<string, ProjectData> = {
   "image-classification": {
     id: "image-classification",
     title: "Image Classification",
-    tagline: "Deep learning for object recognition",
+    tagline: "'my first project'",
     description: [
       "This deep learning project implements a robust image classification system using convolutional neural networks. The model is trained on diverse datasets to accurately recognize and categorize objects across multiple classes.",
       "The classifier employs transfer learning techniques, building upon pre-trained models like ResNet and VGG, then fine-tuning them on specific datasets to achieve high accuracy while reducing training time and computational requirements.",
@@ -148,7 +148,7 @@ const projectsData: Record<string, ProjectData> = {
   "custom-cnn": {
     id: "custom-cnn",
     title: "Custom CNN Model",
-    tagline: "From-scratch neural network architecture",
+    tagline: "'my second project'",
     description: [
       "This project features a custom-built convolutional neural network architecture designed from scratch for specialized image processing tasks. Unlike using pre-trained models, this CNN is architected specifically for target use cases.",
       "The model implements various CNN building blocks including convolutional layers with custom kernel sizes, pooling operations, batch normalization, dropout for regularization, and fully connected layers for classification.",
@@ -160,7 +160,7 @@ const projectsData: Record<string, ProjectData> = {
   "stock-predictor": {
     id: "stock-predictor",
     title: "Stock Market Predictor",
-    tagline: "Time series forecasting with ML",
+    tagline: "'invest wisely'",
     description: [
       "This machine learning project analyzes historical stock market data to predict future price trends using advanced time series analysis and neural network architectures. The system processes multiple financial indicators and market signals.",
       "The predictor employs LSTM (Long Short-Term Memory) networks specifically designed for sequential data, capturing temporal dependencies and patterns in stock price movements. It incorporates technical indicators like moving averages, RSI, and MACD.",
@@ -172,7 +172,7 @@ const projectsData: Record<string, ProjectData> = {
   "gmail-extension": {
     id: "gmail-extension",
     title: "Gmail Extension",
-    tagline: "Enhanced email productivity tool",
+    tagline: "'stupid gmail extension got no hair' - Marcus",
     description: [
       "This Chrome extension enhances Gmail functionality with custom features designed to improve email management and productivity. The extension integrates seamlessly with Gmail's interface, adding new capabilities without disrupting the user experience.",
       "Features include automated email organization, quick reply templates, enhanced search capabilities, and custom keyboard shortcuts. The extension uses Gmail's API and Chrome's extension APIs to provide powerful functionality.",
@@ -184,7 +184,7 @@ const projectsData: Record<string, ProjectData> = {
   "docker-pipeline": {
     id: "docker-pipeline",
     title: "Docker Pipeline CLI",
-    tagline: "Container workflow automation",
+    tagline: "'practicing my devops skills :)'",
     description: [
       "This command-line tool automates Docker workflows and container management, streamlining development and deployment processes. The CLI provides intuitive commands for common Docker operations and complex multi-container orchestration.",
       "The tool includes features for automated image building, container lifecycle management, environment configuration, log aggregation, and deployment automation. It simplifies repetitive Docker commands into single, memorable CLI instructions.",
@@ -196,7 +196,7 @@ const projectsData: Record<string, ProjectData> = {
   "old-website": {
     id: "old-website",
     title: "Old Portfolio Website",
-    tagline: "Previous personal portfolio",
+    tagline: "'took me 40 hours to deploy'",
     description: [
       "This is my previous personal portfolio website, showcasing earlier projects and demonstrating web development skills with traditional HTML, CSS, and JavaScript. The site served as a digital resume and project showcase before the current Mars-themed portfolio.",
       "The website featured a clean, professional design with sections for projects, skills, experience, and contact information. It was built with responsive design principles to ensure compatibility across devices and browsers.",
@@ -337,9 +337,7 @@ export default function ProjectDetail() {
             <header className="mb-8">
               <h1 className="text-5xl font-serif font-bold mb-4">{project.title}</h1>
               <p className="text-xl text-muted-foreground italic">
-                <ClickableWord value={2000} onEarn={handleEarn} wordId="project-tagline" onTriggerHeader={() => {}}>
-                  {project.tagline}
-                </ClickableWord>
+                {project.tagline}
               </p>
             </header>
 

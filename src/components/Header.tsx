@@ -112,6 +112,13 @@ export const Header = ({ amount, earnedAmount, onAnimationComplete }: HeaderProp
             </Link>
             <span className="text-white/50">|</span>
             <Link 
+              to="/projects" 
+              className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm font-medium text-white transition-all duration-300"
+            >
+              Projects
+            </Link>
+            <span className="text-white/50">|</span>
+            <Link 
               to="/about" 
               className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm font-medium text-white transition-all duration-300"
             >
