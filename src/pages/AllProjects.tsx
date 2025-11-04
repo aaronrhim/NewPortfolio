@@ -16,6 +16,8 @@ import stockPredictorImg from "@/assets/stock-predictor.png";
 import gmailExtImg from "@/assets/gmail-extension.jpg";
 import dockerImg from "@/assets/docker-pipeline.png";
 import oldWebsiteImg from "@/assets/old-website.png";
+import factImg from "@/assets/fact.png";
+import leCruiterImg from "@/assets/LeCruiter.png";
 
 export default function AllProjects() {
   const [totalEarnings, setTotalEarnings] = useState(0);
@@ -124,12 +126,14 @@ export default function AllProjects() {
       description: "AI-powered recruiter that streamlines the hiring process using advanced language models and automation.",
       tags: ["Chatbot", "Python", "AWS Bedrock", "AWS Lambda"],
       link: "/project/lecruiter",
+      image: leCruiterImg,
     },
     {
       title: "F.A.C.T",
       description: "Fashion app that uses computer vision, MediaPipe, and maps clothing onto your body with a simple webcam.",
-      tags: ["Python", "MediaPipe", "Computer Vision", "Fashion Tech"],
+      tags: ["Python", "MediaPipe", "Computer Vision", "Fashion Tech", "Web Scraping"],
       link: "/project/fact",
+      image: factImg,
     },
   ];
 
@@ -147,6 +151,37 @@ export default function AllProjects() {
       tags: ["Python", "Telemetry", "Computer Vision", "Docker"],
       link: "/project/arrc",
       image: arrcImg,
+    },
+  ];
+
+  const softwareDevProjects = [
+    {
+      title: "Website Portfolio",
+      description: "My full-stack portfolio site, powered by Next.js and Tailwind.",
+      tags: ["Next.js", "Tailwind", "TypeScript", "Supabase"],
+      link: "/project/website-portfolio",
+      image: portfolioImg,
+    },
+    {
+      title: "Old Website",
+      description: "Previous personal portfolio website showcasing earlier projects and web development skills.",
+      tags: ["HTML", "CSS", "JavaScript", "Jekyll"],
+      link: "/project/old-website",
+      image: oldWebsiteImg,
+    },
+    {
+      title: "Gmail Extension",
+      description: "Chrome extension that enhances Gmail functionality with custom features for improved email management and productivity.",
+      tags: ["JavaScript", "Chrome API", "Web Extension", "Gmail"],
+      link: "/project/gmail-extension",
+      image: gmailExtImg,
+    },
+    {
+      title: "Docker Pipeline",
+      description: "Command-line tool for automating Docker workflows and container management, streamlining development and deployment processes.",
+      tags: ["Docker", "CLI", "DevOps", "Automation"],
+      link: "/project/docker-pipeline",
+      image: dockerImg,
     },
   ];
 
@@ -171,30 +206,6 @@ export default function AllProjects() {
       tags: ["Python", "Recurrent Neural Networks", "LSTM"],
       link: "/project/stock-predictor",
       image: stockPredictorImg,
-    },
-  ];
-
-  const softwareDevProjects = [
-    {
-      title: "Gmail Extension",
-      description: "Chrome extension that enhances Gmail functionality with custom features for improved email management and productivity.",
-      tags: ["JavaScript", "Chrome API", "Web Extension", "Gmail"],
-      link: "/project/gmail-extension",
-      image: gmailExtImg,
-    },
-    {
-      title: "Docker Pipeline",
-      description: "Command-line tool for automating Docker workflows and container management, streamlining development and deployment processes.",
-      tags: ["Docker", "CLI", "DevOps", "Automation"],
-      link: "/project/docker-pipeline",
-      image: dockerImg,
-    },
-    {
-      title: "Old Website",
-      description: "Previous personal portfolio website showcasing earlier projects and web development skills.",
-      tags: ["HTML", "CSS", "JavaScript", "Jekyll"],
-      link: "/project/old-website",
-      image: oldWebsiteImg,
     },
   ];
 
@@ -241,21 +252,21 @@ export default function AllProjects() {
             </div>
           </section>
 
-          {/* AI Projects Section */}
-          <section className="-mx-4 px-4 py-12 mb-16">
-            <h2 className="text-3xl font-serif font-normal text-white text-center mb-8">AI Projects</h2>
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-              {aiProjects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
-              ))}
-            </div>
-          </section>
-
           {/* Software Dev Projects Section */}
           <section className="-mx-4 px-4 py-12 mb-16 bg-secondary/30">
             <h2 className="text-3xl font-serif font-normal text-white text-center mb-8">Software Dev Projects</h2>
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
               {softwareDevProjects.map((project, index) => (
+                <ProjectCard key={index} {...project} />
+              ))}
+            </div>
+          </section>
+
+          {/* AI Projects Section */}
+          <section className="-mx-4 px-4 py-12 mb-16">
+            <h2 className="text-3xl font-serif font-normal text-white text-center mb-8">AI Projects</h2>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+              {aiProjects.map((project, index) => (
                 <ProjectCard key={index} {...project} />
               ))}
             </div>
