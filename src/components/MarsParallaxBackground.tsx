@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 export const MarsParallaxBackground = () => {
   const [scrollY, setScrollY] = useState(0);
   const [roverProgress, setRoverProgress] = useState(0);
+  const [roverDirection, setRoverDirection] = useState(1); // 1 for right, -1 for left
+  const lastTimestampRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,20 +17,29 @@ export const MarsParallaxBackground = () => {
 
   useEffect(() => {
     let animationFrameId: number;
-    let lastTimestamp: number | null = null;
     const speedPerMs = 0.00005; // Controls how quickly the rover crosses the scene
 
     const animate = (timestamp: number) => {
-      if (lastTimestamp === null) {
-        lastTimestamp = timestamp;
+      if (lastTimestampRef.current === null) {
+        lastTimestampRef.current = timestamp;
       }
 
-      const delta = timestamp - lastTimestamp;
-      lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestampRef.current;
+      lastTimestampRef.current = timestamp;
 
       setRoverProgress((prev) => {
-        const next = prev + delta * speedPerMs;
-        return next >= 1 ? next - 1 : next;
+        const next = prev + delta * speedPerMs * roverDirection;
+        
+        // Reverse direction at boundaries
+        if (next >= 1) {
+          setRoverDirection(-1);
+          return 1;
+        } else if (next <= 0) {
+          setRoverDirection(1);
+          return 0;
+        }
+        
+        return next;
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -36,7 +47,7 @@ export const MarsParallaxBackground = () => {
 
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+  }, [roverDirection]);
 
   const stars = useMemo(
     () =>
@@ -279,7 +290,7 @@ export const MarsParallaxBackground = () => {
         style={{
           left: `${roverX}%`,
           bottom: `${roverY}vh`,
-          transform: `translateY(${roverBounce - terrainOffset}px) rotate(${roverTilt}deg)`,
+          transform: `translateY(${roverBounce - terrainOffset}px) rotate(${roverTilt}deg) scaleX(${roverDirection})`,
           width: '280px',
           transformOrigin: 'center bottom',
         }}

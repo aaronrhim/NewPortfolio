@@ -1,49 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { getSessionId } from "@/lib/sessionManager";
 
 interface ClickableWordProps {
   children: React.ReactNode;
   value: number;
   onEarn: (amount: number) => void;
+  wordId: string;
+  onTriggerHeader?: () => void;
 }
 
-export const ClickableWord = ({ children, value, onEarn }: ClickableWordProps) => {
+export const ClickableWord = ({ children, value, onEarn, wordId, onTriggerHeader }: ClickableWordProps) => {
   const [clicked, setClicked] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [animating, setAnimating] = useState(false);
 
-  const handleClick = (e: React.MouseEvent) => {
-    if (clicked) return;
+  // Check if this word was already clicked
+  useEffect(() => {
+    const checkIfClicked = async () => {
+      const sessionId = getSessionId();
+      
+      const { data, error } = await supabase
+        .from('clicked_words')
+        .select('*')
+        .eq('session_id', sessionId)
+        .eq('word_id', wordId)
+        .maybeSingle();
+
+      if (!error && data) {
+        setClicked(true);
+      }
+      setIsLoading(false);
+    };
+
+    checkIfClicked();
+  }, [wordId]);
+
+  const handleClick = async (e: React.MouseEvent) => {
+    if (clicked || isLoading) return;
     
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    // Trigger animation
+    setAnimating(true);
+    setTimeout(() => setAnimating(false), 200);
     
     setClicked(true);
     onEarn(value);
-    
-    setTimeout(() => setClicked(false), 800);
+    onTriggerHeader?.();
+
+    // Save to database
+    const sessionId = getSessionId();
+    await supabase
+      .from('clicked_words')
+      .insert({
+        session_id: sessionId,
+        word_id: wordId,
+        value: value,
+      });
   };
+
+  if (isLoading) {
+    return <span className="relative inline-block text-muted-foreground">{children}</span>;
+  }
 
   return (
     <span className="relative inline-block">
       <span
         onClick={handleClick}
-        className={`clickable-word ${clicked ? "opacity-50" : ""}`}
+        className={`
+          ${clicked ? "clickable-word-clicked" : "clickable-word"}
+          ${animating ? "click-animation" : ""}
+        `}
       >
         {children}
       </span>
-      {clicked && (
-        <span
-          className="absolute pointer-events-none text-accent font-bold money-animation"
-          style={{
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-          }}
-        >
-          +${(value / 100).toFixed(2)}
-        </span>
-      )}
     </span>
   );
 };

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { DollarSign } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { getSessionId } from "@/lib/sessionManager";
 
 interface MoneyCounterProps {
   amount: number;
@@ -8,6 +10,25 @@ interface MoneyCounterProps {
 export const MoneyCounter = ({ amount }: MoneyCounterProps) => {
   const [displayAmount, setDisplayAmount] = useState(amount);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Load total earnings from database on mount
+  useEffect(() => {
+    const loadTotalEarnings = async () => {
+      const sessionId = getSessionId();
+      
+      const { data, error } = await supabase
+        .from('clicked_words')
+        .select('value')
+        .eq('session_id', sessionId);
+
+      if (!error && data) {
+        const total = data.reduce((sum, item) => sum + item.value, 1000); // Start with base 1000
+        setDisplayAmount(total);
+      }
+    };
+
+    loadTotalEarnings();
+  }, []);
 
   useEffect(() => {
     if (amount !== displayAmount) {
