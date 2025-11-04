@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { MoneyCounter } from "@/components/MoneyCounter";
+import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
 import { Contact } from "@/components/Contact";
-import { MarsParallaxBackground } from "@/components/MarsParallaxBackground";
+import { Footer } from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
+import { getSessionId } from "@/lib/sessionManager";
 
 const Index = () => {
   const [totalEarnings, setTotalEarnings] = useState(1000);
+  const [lastEarned, setLastEarned] = useState(0);
+  const [pendingEarnings, setPendingEarnings] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(
-    typeof window !== "undefined" ? window.innerHeight : 0
+    typeof window !== "undefined" ? window.innerHeight : 1000
   );
   const [scrollMetrics, setScrollMetrics] = useState({
     scroll: 0,
@@ -21,8 +25,36 @@ const Index = () => {
   const sectionTop = scrollMetrics.sectionTop;
 
   const handleEarn = (amount: number) => {
-    setTotalEarnings((prev) => prev + amount);
+    setPendingEarnings(amount);
+    setLastEarned(amount);
   };
+
+  const handleAnimationComplete = () => {
+    if (pendingEarnings > 0) {
+      setTotalEarnings((prev) => prev + pendingEarnings);
+      setPendingEarnings(0);
+    }
+    setLastEarned(0);
+  };
+
+  // Load initial total earnings from database
+  useEffect(() => {
+    const loadTotalEarnings = async () => {
+      const sessionId = getSessionId();
+      
+      const { data, error } = await supabase
+        .from('clicked_words')
+        .select('value')
+        .eq('session_id', sessionId);
+
+      if (!error && data) {
+        const total = data.reduce((sum, item) => sum + item.value, 1000); // Start with base 1000
+        setTotalEarnings(total);
+      }
+    };
+
+    loadTotalEarnings();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setViewportHeight(window.innerHeight);
@@ -74,19 +106,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      <MarsParallaxBackground />
       <div
-        className="fixed inset-x-0 bottom-0 z-0 pointer-events-none transition-opacity duration-200 ease-out"
+        className="fixed inset-x-0 bottom-0 z-0 pointer-events-none"
         style={{
-          top: showOverlay ? `${overlayTop}px` : "100%",
-          opacity: showOverlay ? 1 : 0,
-          backgroundColor: "#d2691e",
+          top: `${overlayTop}px`,
+          backgroundColor: "hsl(var(--terrain))",
         }}
         aria-hidden="true"
       />
-      <MoneyCounter amount={totalEarnings} />
+      <Header amount={totalEarnings} earnedAmount={lastEarned} onAnimationComplete={handleAnimationComplete} />
       
-      <main className="relative z-10">
+      <main className="relative z-10 pt-24 animate-fade-in">
         <section>
           <Hero onEarn={handleEarn} />
         </section>
@@ -101,13 +131,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="py-8 px-4 border-t border-border relative z-10 bg-[#d2691e]">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted-foreground">
-            © 2025 Your Name. Built with React & Tailwind CSS.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
