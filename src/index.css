@@ -42,6 +42,8 @@ All colors MUST be HSL.
     --money-color: 0 84% 60%;
     --highlight-color: 0 84% 60%;
     --card-hover: 35 30% 95%;
+    --terrain: 25 75% 47%;
+    --footer-bg: 25 60% 75%;
     
     /* Shadows */
     --shadow-sm: 0 2px 8px hsl(20 10% 15% / 0.08);
@@ -85,6 +87,8 @@ All colors MUST be HSL.
     --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
     --shadow-lg: 0 8px 24px hsl(0 0% 0% / 0.5);
+    --terrain: 25 75% 47%;
+    --footer-bg: 25 60% 75%;
   }
 }
 
@@ -98,6 +102,19 @@ All colors MUST be HSL.
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
+  /* Base terrain to prevent initial flicker before JS mounts */
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 95vh; /* initial position approximating overlayStartRatio */
+    background: hsl(var(--terrain));
+    pointer-events: none;
+    z-index: 0;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
   }
@@ -105,29 +122,33 @@ All colors MUST be HSL.
 
 @layer utilities {
   .clickable-word {
-    @apply relative inline-block cursor-pointer px-1 transition-all duration-300;
+    @apply relative inline-block cursor-pointer px-1;
     color: hsl(var(--accent));
+    font-weight: 600;
+    transition: all 0.15s ease-out;
+  }
+  
+  .clickable-word-clicked {
+    @apply relative inline-block cursor-default px-1;
+    color: hsl(var(--accent));
+    opacity: 0.4;
     font-weight: 600;
   }
   
-  .clickable-word:hover {
-    transform: translateY(-2px);
+  @keyframes click-shrink {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
   
-  .clickable-word::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: hsl(var(--accent));
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-  
-  .clickable-word:hover::after {
-    transform: scaleX(1);
+  .click-animation {
+    animation: click-shrink 0.2s ease-out;
   }
   
   @keyframes money-pop {
