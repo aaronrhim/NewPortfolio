@@ -28,7 +28,7 @@ Below is a breakdown of how everything is built and organized.
 |-----------|---------------|
 | **Frontend** | Vite, React, TypeScript, TailwindCSS, shadcn/ui |
 | **Design** | Figma, Framer, Illustrator |
-| **Deployment** | Lovable, GitHub Pages (custom domain) |
+| **Deployment** | AWS Amplify (custom domain) |
 | **Utilities** | ESLint, Prettier, pnpm |
 
 ---
@@ -40,7 +40,7 @@ Everything is built around a **component-driven** structure, optimized for clari
 
 ### Highlights
 - **Dynamic Navigation & Layouts** – Each page and section is modularly routed.  
-- **Instant Development Preview** – Powered by `vite`’s live reload and Lovable’s deployment pipeline.  
+- **Instant Development Preview** – Powered by `vite`’s live reload and AWS Amplify’s deployment pipeline.  
 - **Type-Safe Components** – Fully typed using TypeScript, improving scalability and error prevention.  
 - **Responsive Design** – TailwindCSS and utility-first classes ensure pixel-perfect layouts from mobile to 4K.  
 - **shadcn/ui Integration** – Pre-styled accessible components fine-tuned for a cohesive visual identity.  
@@ -59,9 +59,9 @@ Designed in **Figma**, emphasizing:
 ## ☁️ Backend + Integrations
 
 This site runs entirely on a static front-end but integrates several backend and automation components:
-- **GitHub Integration** – Commits from Lovable sync automatically to this repo.  
+- **GitHub Integration** – Commits from AWS Amplify to sync and deploy automatically to this repo.  
 - **Custom Scripts** – Node.js utilities for managing builds and experimental APIs.  
-- **Local Development** – Fully configurable using your IDE, Codespaces, or Lovable editor.
+- **Local Development** – Fully configurable using your IDE, Codespaces, or AWS Amplify editor.
 
 ```bash
 # Clone and run locally

@@ -58,9 +58,9 @@ const projectsData: Record<string, ProjectData> = {
     description: [
       "This portfolio website features a unique gamified experience where visitors can click highlighted words throughout the site to earn virtual currency. Each interaction is tracked persistently using cloud storage, ensuring progress is maintained across sessions and devices.",
       "The site showcases an immersive Mars parallax background with animated elements including a roving Mars rover, rotating Earth, distant mountains, and a futuristic Mars colony. The rover autonomously travels across the terrain, reversing direction at screen edges while maintaining smooth animations.",
-      "Built with modern web technologies, the portfolio demonstrates advanced React patterns, TypeScript type safety, Tailwind CSS design system, and full-stack capabilities with Lovable Cloud for persistent data storage and real-time synchronization."
+      "Built with modern web technologies, the portfolio demonstrates advanced React patterns, TypeScript type safety, Tailwind CSS design system, and full-stack capabilities with Supabase for persistent data storage and AWS Amplify for real-time synchronization."
     ],
-    tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Lovable Cloud", "Supabase"],
+    tech: ["Next.js", "React", "Tailwind", "TypeScript", "Supabase"],
     github: "https://github.com/aaronrhim/genesis-gin"
   },
   "rover": {

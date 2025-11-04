@@ -52,7 +52,7 @@ export const Projects = ({ onEarn }: ProjectsProps) => {
     {
       title: "Website Portfolio",
       description: "Interactive Mars-themed portfolio with gamified click-for-cash mechanics, persistent cloud storage, and smooth parallax animations featuring a Mars rover and Earth.",
-      tags: ["React", "TypeScript", "Tailwind CSS", "Lovable Cloud"],
+      tags: ["React", "TypeScript", "Tailwind CSS", "AWS Amplify", "Supabase"],
       link: "/project/website-portfolio",
       image: portfolioImg,
     },
