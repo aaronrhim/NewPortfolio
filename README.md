@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Aaron Rhim — Interactive Portfolio & Experimental Playground
 
-## Project info
+My full-stack personal portfolio built with **Vite**, **React**, and **TypeScript**, designed as an evolving hub for my projects, simulations, and robotics research.  
 
-**URL**: https://lovable.dev/projects/6c9e9fa8-7049-407e-82d6-c51b7934445c
+🌐 **Live Site:** [aaronrhim.github.io](https://aaronrhim.github.io)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🧭 Overview
 
-**Use Lovable**
+This website serves as both a **personal portfolio** and a **technical sandbox**—showcasing robotics experiments, design prototypes, and full-stack utilities I’ve built.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6c9e9fa8-7049-407e-82d6-c51b7934445c) and start prompting.
+It’s a reflection of my workflow: modular, fast, and always being refactored.  
+Below is a breakdown of how everything is built and organized.
 
-Changes made via Lovable will be committed automatically to this repo.
+- 🛠️ Tools & Frameworks  
+- ⚙️ Frontend Architecture  
+- 🧩 UI/UX Design System  
+- ☁️ Backend + Integrations  
+- 🚀 Deployment & Hosting  
+- 🔮 Future Directions  
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Tools & Frameworks
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Category | Technologies |
+|-----------|---------------|
+| **Frontend** | Vite, React, TypeScript, TailwindCSS, shadcn/ui |
+| **Design** | Figma, Framer, Illustrator |
+| **Deployment** | Lovable, GitHub Pages (custom domain) |
+| **Utilities** | ESLint, Prettier, pnpm |
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+## ⚙️ Frontend Architecture
+
+The site uses **Vite + React** for an extremely fast development workflow.  
+Everything is built around a **component-driven** structure, optimized for clarity and reusability.
+
+### Highlights
+- **Dynamic Navigation & Layouts** – Each page and section is modularly routed.  
+- **Instant Development Preview** – Powered by `vite`’s live reload and Lovable’s deployment pipeline.  
+- **Type-Safe Components** – Fully typed using TypeScript, improving scalability and error prevention.  
+- **Responsive Design** – TailwindCSS and utility-first classes ensure pixel-perfect layouts from mobile to 4K.  
+- **shadcn/ui Integration** – Pre-styled accessible components fine-tuned for a cohesive visual identity.  
+
+---
+
+## 🧩 UI / UX Design System
+
+Designed in **Figma**, emphasizing:
+- **Minimal visual noise** – clean, layered typography and accent color hierarchy.  
+- **Micro-interactions** – subtle transitions powered by Tailwind’s animation utilities.  
+- **Scalable sections** – each module (Projects, About, Contact) can expand independently.
+
+---
+
+## ☁️ Backend + Integrations
+
+This site runs entirely on a static front-end but integrates several backend and automation components:
+- **GitHub Integration** – Commits from Lovable sync automatically to this repo.  
+- **Custom Scripts** – Node.js utilities for managing builds and experimental APIs.  
+- **Local Development** – Fully configurable using your IDE, Codespaces, or Lovable editor.
+
+```bash
+# Clone and run locally
 git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/6c9e9fa8-7049-407e-82d6-c51b7934445c) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
