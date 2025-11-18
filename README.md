@@ -2,7 +2,7 @@
 
 My full-stack personal portfolio built with **Vite**, **React**, and **TypeScript**, designed as an evolving hub for my projects, simulations, and robotics research.  
 
-🌐 **Live Site:** [aaronrhim.github.io](https://aaronrhim.github.io)
+🌐 **Live Site:** [aaronrhim.com](aaronrhim.com)
 
 ---
 
