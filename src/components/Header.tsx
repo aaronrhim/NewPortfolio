@@ -126,7 +126,7 @@ export const Header = ({ amount, earnedAmount, onAnimationComplete }: HeaderProp
             </Link>
             <span className="text-white/50">|</span>
             <a 
-              href="https://drive.google.com/file/d/10ep7k9FxkevmyLvNVe8t2HCa_Fd2GVAZ/view?usp=sharing"
+              href="https://drive.google.com/file/d/1ljOxT302xGZm_-WL4YFmB8QUK_GpBGLu/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm font-medium text-white transition-all duration-300"

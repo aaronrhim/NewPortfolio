@@ -18,6 +18,7 @@ import dockerImg from "@/assets/docker-pipeline.png";
 import oldWebsiteImg from "@/assets/old-website.png";
 import factImg from "@/assets/fact.png";
 import leCruiterImg from "@/assets/LeCruiter.png";
+import cpsc210Img from "@/assets/cpsc210.png";
 
 export default function AllProjects() {
   const [totalEarnings, setTotalEarnings] = useState(0);
@@ -161,6 +162,13 @@ export default function AllProjects() {
       tags: ["Next.js", "Tailwind", "TypeScript", "Supabase"],
       link: "/project/website-portfolio",
       image: portfolioImg,
+    },
+    {
+      title: "3D Rendering Simulation",
+      description: "Custom 3D rendering engine, fully multithreaded and integrated graphical interface in Java",
+      tags: ["Java", "Javax Swing", "Multithreading"],
+      link: "/project/cpsc210",
+      image: cpsc210Img,
     },
     {
       title: "Old Website",
