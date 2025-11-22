@@ -2,7 +2,8 @@
 
 My full-stack personal portfolio built with **Vite**, **React**, and **TypeScript**, designed as an evolving hub for my projects, simulations, and robotics research.  
 
-🌐 **Live Site:** [aaronrhim.com](aaronrhim.com)
+🌐 **Live Site:** [aaronrhim.com](https://aaronrhim.com)
+AWS AMPLIFY IS CURRENTLY DOWN. TO VIEW WEBSITE, PLEASE CLONE THE REPOSITORY YOURSELF AND FOLLOW THE INSTRUCTIONS BELOW.
 
 ---
 
